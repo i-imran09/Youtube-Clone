@@ -53,7 +53,7 @@ const Sidebar = ({sidebar,category,setCategory}) => {
         <div className="subscribed-list">
             <h3>Subscribed</h3>
             <div className="side-link">
-                <img src={simon} alt="" /><p>Ramya_Cute</p>
+                <img src={simon} alt="" /><p>Ramya</p>
             </div>
             <div className="side-link">
                 <img src={miran} alt="" /><p>Nicoloes</p>
@@ -62,10 +62,10 @@ const Sidebar = ({sidebar,category,setCategory}) => {
                 <img src={tom} alt="" /><p>Simon</p>
             </div>
             <div className="side-link">
-                <img src={megan} alt="" /><p>MR.Jack</p>
+                <img src={megan} alt="" /><p>Catheren</p>
             </div>
             <div className="side-link">
-                <img src={cameron} alt="" /><p>Cathrin</p>
+                <img src={cameron} alt="" /><p>MR.Jack</p>
             </div>
         </div>
     </div>
