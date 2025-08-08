@@ -1,24 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './PlayVideo.css'
-import video1 from '../../assets/video.mp4'
 import like from '../../assets/like.png'
 import dislike from '../../assets/dislike.png'
 import share from '../../assets/share.png'
 import save from '../../assets/save.png'
 import jack from '../../assets/jack.png'
 import user_profile from '../../assets/user_profile.jpg'
+import { API_KEY,value_converter } from '../../data'
+import moment from 'moment'
 
 
-const PlayVideo = () => {
+const PlayVideo = ({videoId}) => {
+
+
+    const [apiData,setApiData]=useState(null)
+
+    useEffect(()=>{
+        const videoDetails_url= `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${API_KEY}`;
+        fetch(videoDetails_url)
+        .then((response) => response.json())
+        .then((data) => setApiData(data.items[0]));
+    },[])
+
+
+
   return (
     <div className="play-video">
-        <video src={video1} controls autoPlay muted></video>
-        <h3>Best youtube channel to learn web development</h3>
+        {/* <video src={video1} controls autoPlay muted></video> */}
+        <iframe src={`https://www.youtube.com/embed/${videoId}?autoplay=1`} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <h3>{apiData?apiData.snippet.title:"Title here"}</h3>
         <div className="play-video-info">
-            <p>1523 view &bull; 2 days ago</p>
+            <p>{value_converter(apiData?apiData.statistics.viewCount:"Viewcount here")} view &bull; {moment(apiData?apiData.snippet.publishedAt:"Dated posted at").fromNow()}</p>
         <div>
-            <span><img src={like} alt="" />125</span>
-            <span><img src={dislike} alt="" />2</span>
+            <span><img src={like} alt="" />{value_converter(apiData?apiData.statistics.likeCount:"Viewcount here")}</span>
+            <span><img src={dislike} alt="" /></span>
             <span><img src={share} alt="" />share</span>
             <span><img src={save} alt="" />save</span>
         </div>

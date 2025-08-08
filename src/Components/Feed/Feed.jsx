@@ -16,12 +16,13 @@ const Feed = ({category}) => {
 
   return (
     <div className="feed">
-        {datas.map((item,index)=>(
+        {datas.map((item,index)=>(          
         <Link to={`video/${item.snippet.categoryId}/${item.id}`} className="card">
         <img src={item.snippet.thumbnails.medium.url} alt="" />
         <h2>{item.snippet.title}</h2>
         <h3>{item.snippet.channelTitle}</h3>
         <p>{value_converter(item.statistics.viewCount)} views&bull; {moment(item.snippet?.publishedAt).fromNow()}</p>
+        key={index}
     </Link>
         ))}
 
